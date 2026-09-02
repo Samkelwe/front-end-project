@@ -1,0 +1,30 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+.book-list {
+  width: 600px;
+  margin: 40px auto;
+}
+
+.search-button{
+  background-color : pink;
+  color : rgb(10, 10, 10);
+  cursor : pointer;
+  padding : 0px, 10px, 60px
+}
+.book {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.book h2 {
+  margin-bottom: 5px;
+}
+
+.book p {
+  color: gray;
+}
