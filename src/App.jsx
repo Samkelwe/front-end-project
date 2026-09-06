@@ -1,59 +1,61 @@
+import { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
 
-import Books from "../components/Books"
-import "./App.css"
-import { useState } from "react"
-import Uzalo from '../components/Uzalo.jpg';
-import The4OfUs from '../components/the4ofus.jpg';
-import Skeem from '../components/Skeem.jpg';
-
-
-
-
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 
 function App() {
+  const [favorites, setFavorites] = useState([]);
 
-  const [searchQuery, setSearchQuery] = useState("")
+  const toggleFavorite = (book) => {
+    setFavorites((prev) => {
+      const isFavorite = prev.some((item) => item.id === book.id);
 
-  const books = [
-    {title : "The Four Of Us", author : "Kamogelo", url : The4OfUs},
-    {title : "Uzalo", author : "Mpho", url : Uzalo },
-    {title : "Skeem Saam", author : "Nyiko", url : Skeem}
-    
-  ];
+      if (isFavorite) {
+        return prev.filter((item) => item.id !== book.id);
+      }
 
-  const handleSearch = (e) => {
-    e.prevetDefault();
-    setSearchQuery("");
+      return [...prev, book];
+    });
+  };
 
-  }
-  return(
-<>
-  <form onSubmit = {handleSearch} className = "search-form">
+  return (
+    <>
+      <nav className="navbar">
+        <h1>My Books</h1>
 
-     <input type = "text" 
-     placeholder= "Search for a book..." 
-     className = "search-input" 
-     value = {searchQuery}
-     onChange = { (e) => setSearchQuery(e.target.value)}
-     />
-     <button type = "Submit" className="search-button">Search</button>
-      
-    </form>
+        <div className="nav-links">
+          <Link to="/">Home</Link>
 
- 
+          <Link to="/favorites">
+            Favorites ({favorites.length})
+          </Link>
+        </div>
+      </nav>
 
-<div className= "books-grid">
-  {books.map((book) =>  
-  book.title.toLowerCase().startsWith(searchQuery) &&
-        (<Books book= {book} key = {book.id} />)
-   )
-  }
-</div>
-</>
-  
-  )
-    
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              favorites={favorites}
+              onFavorite={toggleFavorite}
+            />
+          }
+        />
+
+        <Route
+          path="/favorites"
+          element={
+            <Favorites
+              favorites={favorites}
+              onFavorite={toggleFavorite}
+            />
+          }
+        />
+      </Routes>
+    </>
+  );
 }
 
 export default App;
-
