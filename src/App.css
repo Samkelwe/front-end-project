@@ -3,28 +3,51 @@ body {
   background-color: #f4f4f4;
 }
 
-.book-list {
-  width: 600px;
-  margin: 40px auto;
+.navbar {
+  background-color: #000000;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.search-button{
-  background-color : pink;
-  color : rgb(10, 10, 10);
-  cursor : pointer;
-  padding : 0px, 10px, 60px
-}
-.book {
-  background-color: white;
-  padding: 20px;
-  margin-bottom: 15px;
-  border-radius: 8px;
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
-.book h2 {
-  margin-bottom: 5px;
+.navbar-links {
+  display: flex;
+  gap: 2rem;
 }
 
-.book p {
-  color: gray;
+.nav-link {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .navbar-links {
+    gap: 1rem;
+  }
+
+  .nav-link {
+  text-decoration: none;
+  padding: 0.5rem;
+  }
 }

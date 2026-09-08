@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-
+import NavBar from "./pages/NavBar"
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
+import "./App.css"
 
 function App() {
   const [favorites, setFavorites] = useState([]);
@@ -22,16 +23,15 @@ function App() {
   return (
     <>
       <nav className="navbar">
-        <h1>My Books</h1>
-
-        <div className="nav-links">
-          <Link to="/">Home</Link>
-
-          <Link to="/favorites">
-            Favorites ({favorites.length})
-          </Link>
+        <div className="navbar-brand">
+            <Link to="/">Books App</Link>
         </div>
-      </nav>
+        <div className="navbar-links">
+            <Link to="/" className="nav-link">Home</Link> <br/>
+            <Link to="/favorites" className="nav-link">Favorites</Link>
+            <br/><br/>
+        </div>
+    </nav>
 
       <Routes>
         <Route

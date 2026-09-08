@@ -1,10 +1,12 @@
 import Books from "../../components/Books";
+import "./Favorites.css"
 
 function Favorites({ favorites, onFavorite }) {
   return (
     <div>
       {favorites.length === 0 ? (
         <div className="favorite-empty">
+          <br/>
           <h2>No favorite books yet</h2>
 
           <p>
@@ -12,7 +14,9 @@ function Favorites({ favorites, onFavorite }) {
           </p>
         </div>
       ) : (
+      
         <div className="books-grid">
+        
           {favorites.map((book) => (
             <Books
               key={book.id}

@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import Books from "../../components/Books";
-
+import "./Home.css"
 import The4OfUs from "../../components/the4ofus.jpg";
 import Uzalo from "../../components/Uzalo.jpg";
 import Skeem from "../../components/Skeem.jpg";
@@ -37,6 +37,7 @@ function Home({ favorites, onFavorite }) {
 
   return (
     <>
+    <br/>
       <form onSubmit={handleSearch} className="search-form">
         <input
           type="text"
