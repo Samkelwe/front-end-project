@@ -1,4 +1,4 @@
- import { useState } from "react";
+import { useState } from "react";
 import Books from "../../components/Books";
 import "./Home.css";
 import The4OfUs from "../../components/the4ofus.jpg";
@@ -6,13 +6,15 @@ import Uzalo from "../../components/Uzalo.jpg";
 import Skeem from "../../components/Skeem.jpg";
 import axios from "axios";
 
+const API_URL = "https://learnapi-production-9220.up.railway.app";
+
 function Home({ favorites, onFavorite }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  let url = "http://localhost:8080/api/books";
+  let url = `${API_URL}/api/books`;
 
   async function getBooks() {
     setLoading(true);
