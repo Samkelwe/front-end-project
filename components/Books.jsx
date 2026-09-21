@@ -6,7 +6,7 @@ function Books({ book, onFavorite, isFavorite }) {
       <div className="book-poster">
         <img
           className="images"
-          src={book.url}
+          src={book.imageUrl}
           alt={book.title}
         />
 
@@ -29,4 +29,3 @@ function Books({ book, onFavorite, isFavorite }) {
 }
 
 export default Books;
-
