@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import NavBar from "./pages/NavBar"
 import Home from "./pages/Home";
+import Welcome from "./pages/Welcome";
 import Favorites from "./pages/Favorites";
 import "./App.css"
 
@@ -27,7 +28,8 @@ function App() {
             <Link to="/">Books App</Link>
         </div>
         <div className="navbar-links">
-            <Link to="/" className="nav-link">Home</Link> <br/>
+         
+            <Link to="/Home" className="nav-link">Home</Link> <br/>
             <Link to="/favorites" className="nav-link">Favorites</Link>
             <br/><br/>
         </div>
@@ -36,6 +38,13 @@ function App() {
       <Routes>
         <Route
           path="/"
+          element={
+            <Welcome
+            />
+          }
+        />
+        <Route
+          path="/home"
           element={
             <Home
               favorites={favorites}

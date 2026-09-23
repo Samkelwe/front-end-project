@@ -5,40 +5,43 @@ import The4OfUs from "../../components/the4ofus.jpg";
 import Uzalo from "../../components/Uzalo.jpg";
 import Skeem from "../../components/Skeem.jpg";
 import axios from "axios";
+import {useLocation} from 'react-router-dom';
 
-const API_URL = "https://learnapi-production-9220.up.railway.app";
 
 function Home({ favorites, onFavorite }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  let url = `${API_URL}/api/books`;
-
-  async function getBooks() {
-    setLoading(true);
-    setError(null);
-    try {
-      const response = await axios.get(url, {
-        headers: { Accept: "application/json" },
-      });
-      console.log("API response:", response.data);
-      setBooks(response.data);
-    } catch (err) {
-      console.error("Failed to fetch books:", err);
-      setError("Couldn't load books. Check the API is running.");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const location = useLocation();
+  const books = location.state?.books || [];
+ 
 
   const handleSearch = (e) => {
     e.preventDefault();
   };
 
+  
+
+// 2. Add the delete function handler
+const handleDeleteBook = (bookId) => {
+  // Option A: Just remove it from the screen immediately (Frontend only)
+  setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId));
+
+  /* Option B: If you have a working API endpoint, delete it from the backend database too:
+  
+  axios.delete(`https://learnapi-production-9220.up.railway.app{bookId}`)
+    .then(() => {
+      setBooks(prevBooks => prevBooks.filter(book => book.id !== bookId));
+    })
+    .catch(err => console.error("Could not delete book from server", err));
+  */
+};
+
   return (
     <>
+
+    
+
       <br />
       <form onSubmit={handleSearch} className="search-form">
         <input
@@ -53,12 +56,6 @@ function Home({ favorites, onFavorite }) {
         </button>
       </form>
 
-      <button onClick={getBooks} className="fetch-button" disabled={loading}>
-        {loading ? "Loading..." : "Load Books"}
-      </button>
-
-      {error && <p className="error-message">{error}</p>}
-
       <div className="books-grid">
         {books
           .filter((book) =>
@@ -70,6 +67,7 @@ function Home({ favorites, onFavorite }) {
               book={book}
               onFavorite={onFavorite}
               isFavorite={favorites.some((item) => item.id === book.id)}
+              onDelete={handleDeleteBook}
             />
           ))}
       </div>
